@@ -29,12 +29,15 @@ def upload_spreadsheet(path, active_sheet_only=True):
             df = pd.DataFrame(wb.active.values)
         else:
             #combine all sheets into one dataframe
+            print(len(wb.worksheets), 'sheets found')
             frames = [pd.DataFrame(sheet.values) for sheet in wb.worksheets]
             df = pd.concat(frames)
+            print(df)
+        wb.close()
     else:
-        return pd.Dataframe()
+        return pd.DataFrame()
             
-    wb.close()
+    
     return df
         
 def combine_dataframe(dataframe):
